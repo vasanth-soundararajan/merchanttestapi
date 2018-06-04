@@ -17,6 +17,15 @@ public class UsersTest extends TestBase {
 	@BeforeClass
 	public void beforeClass() {	
 		userActions = new UserActions();
+	}
+	
+	@Test(priority=1)
+	public void shouldHaveStatus200ForAllUserList() {
+		REQUEST.get("/users").then().statusCode(200);
+	}
+	
+	@Test(priority=2)
+	public void createuserTest() {
 		Geo geo =  new Geo();
 		geo.setLat(FAKER.address().latitude());
 		geo.setLng(FAKER.address().longitude());
@@ -34,20 +43,17 @@ public class UsersTest extends TestBase {
 		user.setAddress(address);
 		
 		createdUser = userActions.addNewUser(user);
+		Assert.assertTrue(createdUser.getUsername().equals(user.getUsername()));
 	}
 	
-	@Test(priority=1)
-	public void shouldHaveStatus200ForAllUserList() {
-		REQUEST.get("/users").then().statusCode(200);
-	}
 	
-	@Test(priority=2)
+	@Test(priority=3)
 	public void getuserTest() {
 		User retUser = userActions.getUser(createdUser.getId());
 		Assert.assertTrue(retUser.getUsername().equals(createdUser.getUsername()));
 	}
 	
-	@Test(priority=3)
+	@Test(priority=4)
 	public void updateuserTest() {
 		
 		User retUser = userActions.getUser(createdUser.getId());
@@ -60,7 +66,7 @@ public class UsersTest extends TestBase {
 		Assert.assertTrue(retUpdatedUser.getEmail().equals(retUser.getEmail()));
 	}
 	
-	@Test(priority=4)
+	@Test(priority=5)
 	public void deleteUsers() {
 		
 		userActions.deleteUser(createdUser);
