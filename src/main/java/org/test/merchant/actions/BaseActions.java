@@ -1,4 +1,4 @@
-package org.test.merchant.config;
+package org.test.merchant.actions;
 
 import java.io.IOException;
 import java.util.Properties;
@@ -9,18 +9,12 @@ import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 
-public class TestBase {
+public class BaseActions {
 	
-	public static String BASE_URL = "http://petstore.swagger.io/v2";
-    public String COMMENT_ENDPOINT = BASE_URL + "/comment";
-    public String POST_ENDPOINT = BASE_URL + "/store";
-    public String USER_ENDPOINT = BASE_URL + "/user";
-
 	public RequestSpecification REQUEST;
 	public Faker FAKER = new Faker();
-
-	public TestBase() {
-
+	
+	public BaseActions() {
 		try {
 			Properties props = new Properties();
 			props.load(getClass().getClassLoader().getResourceAsStream("config.properties"));
