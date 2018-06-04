@@ -10,11 +10,6 @@ import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 
 public class TestBase {
-	
-	public static String BASE_URL = "http://petstore.swagger.io/v2";
-    public String COMMENT_ENDPOINT = BASE_URL + "/comment";
-    public String POST_ENDPOINT = BASE_URL + "/store";
-    public String USER_ENDPOINT = BASE_URL + "/user";
 
 	public RequestSpecification REQUEST;
 	public Faker FAKER = new Faker();
