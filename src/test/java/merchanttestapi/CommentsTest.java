@@ -109,6 +109,7 @@ public class CommentsTest extends TestBase {
 	public void afterClass() {	
 		postActions.getPost(createdPost.getId());
 		postActions.deletePost(createdPost);
+		userActions.deleteUser(createdUser);
 	}
 	
 
