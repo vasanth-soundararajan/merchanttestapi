@@ -24,6 +24,7 @@ public class CommentsTest extends TestBase {
 	Post createdPost;
 	User createdUser;
 	Comment createdComment;
+	//
 
 	@BeforeClass
 	public void beforeClass() {	
