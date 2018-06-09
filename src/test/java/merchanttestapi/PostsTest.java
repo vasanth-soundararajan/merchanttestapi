@@ -2,7 +2,6 @@ package merchanttestapi;
 
 import org.test.merchant.actions.PostActions;
 import org.test.merchant.actions.UserActions;
-import org.test.merchant.config.TestBase;
 import org.test.merchant.model.Address;
 import org.test.merchant.model.Geo;
 import org.test.merchant.model.Post;
@@ -12,18 +11,27 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-public class PostsTest extends TestBase {
+import com.github.javafaker.Faker;
+
+import io.restassured.specification.RequestSpecification;
+
+public class PostsTest {
 
 	PostActions postActions;
 	Post createdPost;
 	
 	UserActions userActions;
 	User createdUser;
+	
+	Faker FAKER;
+	RequestSpecification REQUEST;
 
 	@BeforeClass
 	public void beforeClass() {
 		
 		userActions = new UserActions();
+		FAKER = userActions.FAKER;
+		REQUEST = userActions.REQUEST;
 		Geo geo =  new Geo();
 		geo.setLat(FAKER.address().latitude());
 		geo.setLng(FAKER.address().longitude());
