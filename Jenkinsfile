@@ -2,7 +2,7 @@ node {
    // Mark the code checkout 'stage'....
    stage 'Checkout'
    
-   git url: 'https://github.com/lavanya132/merchanttestapi.git'
+   git url: 'https://github.com/vasanth-soundararajan/merchanttestapi.git'
 
    // Get the maven tool.
    // ** NOTE: This 'M3' maven tool must be configured
