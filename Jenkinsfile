@@ -1,17 +1,29 @@
-node {
-   // Mark the code checkout 'stage'....
-   stage 'Checkout'
-   
-   git url: 'https://github.com/vasanth-soundararajan/merchanttestapi.git'
+pipeline {
+    stages {
+	     def mvnHome = tool 'M3'
+        stage(‘Build Development') {
+            when {
+                branch ‘development’ 
+            }
+            steps {
+                //sh './jenkins/scripts/deliver-for-development.sh'
+                //input message: 'Finished using the web site? (Click "Proceed" to continue)'
+                //sh './jenkins/scripts/kill.sh'
 
-   // Get the maven tool.
-   // ** NOTE: This 'M3' maven tool must be configured
-   // **       in the global configuration.           
-   def mvnHome = tool 'M3'
-
-   // Mark the code build 'stage'....
-   stage 'Build'
-   // Run the maven build
-   sh "${mvnHome}/bin/mvn clean test"
-   step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
+   	   		// Run the maven build
+   			sh "${mvnHome}/bin/mvn clean test"
+   			step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
+            }
+        }
+        stage(‘Build Integration’) {
+            when {
+                branch ‘integration'  
+            }
+            steps {
+   	   		// Run the maven build
+   			sh "${mvnHome}/bin/mvn clean test"
+   			step([$class: 'JUnitResultArchiver', testResults: '**/target/surefire-reports/TEST-*.xml'])
+            }
+        }
+    }
 }
